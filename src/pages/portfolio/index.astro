@@ -1,0 +1,74 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Navbar from '../../components/Navbar.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+
+const lang = Astro.currentLocale ?? 'en';
+---
+
+<BaseLayout title="Portfolio — Naomi Lago" description="Projects in NLP, LLM agents, ML at scale, and MLOps.">
+  <Navbar lang={lang} />
+  <div class="page-body">
+
+    <!-- Page header -->
+    <section class="bg-[#FCFBFF] dark:bg-[#0f0d20] border-b border-[#e8e3f5] dark:border-[#1e1a38] py-12">
+      <div class="container">
+        <span class="inline-block mb-4 bg-[#ede9f8] dark:bg-[#1e1a40] text-[#5c3fa3] dark:text-[#b89aec] text-[9px] font-medium tracking-[0.08em] px-3 py-1 rounded-full">
+          Work
+        </span>
+        <h1 class="text-[28px] font-medium tracking-[-0.02em] text-[#150a35] dark:text-[#e2dcff] mb-3">Portfolio</h1>
+        <p class="text-[14px] text-[#555] dark:text-[#7a7aaa]">ML systems, LLM agents, and data pipelines at scale.</p>
+      </div>
+    </section>
+
+    <!-- Featured project -->
+    <section class="border-b border-[#e8e3f5] dark:border-[#1e1a38] py-12">
+      <div class="container">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-0 rounded-xl overflow-hidden border border-[#e8e3f5] dark:border-[#22203a]">
+          <!-- Left -->
+          <div class="bg-white dark:bg-[#12102a] p-8 md:p-10 flex flex-col justify-center">
+            <span class="inline-block self-start mb-4 bg-[#ede9f8] dark:bg-[#1e1a40] text-[#5c3fa3] dark:text-[#b89aec] text-[9px] font-medium tracking-[0.08em] px-3 py-1 rounded-full">
+              Featured
+            </span>
+            <h2 class="text-[22px] font-medium tracking-[-0.02em] text-[#150a35] dark:text-[#e2dcff] mb-3 leading-snug">
+              Yara: Trans-Affirming Assistant
+            </h2>
+            <p class="text-[14px] text-[#555] dark:text-[#7a7aaa] leading-[1.75] mb-5">
+              A trans-affirming AI assistant available 24/7 on WhatsApp, built with a LangGraph agent and a suite of specialized tools. It provides emotional support alongside accurate information on trans healthcare (SUS), legal rights, and transition guidance — with humanized voice responses via ElevenLabs TTS. Deployed on Google Cloud Run with a FastAPI backend and React frontend.
+            </p>
+            <div class="flex gap-2 mb-6 flex-wrap">
+              {['LangGraph', 'RAG', 'GCP', 'AIOps'].map(tag => (
+                <span class="text-[9px] font-medium tracking-[0.06em] bg-[#f0ecfc] dark:bg-[#1a1838] text-[#5c3fa3] dark:text-[#a080e0] px-2 py-1 rounded-sm uppercase">{tag}</span>
+              ))}
+            </div>
+            <div class="flex gap-3">
+              <a href="https://souyara.com.br/" target="_blank" class="btn-primary">View project</a>
+              <a href="https://github.com/naomilago/Yara" target="_blank" class="btn-ghost">GitHub →</a>
+            </div>
+          </div>
+          <!-- Right: code -->
+          <div class="bg-[#FCFBFF] dark:bg-[#13112b] p-8 md:p-10 flex items-center">
+            <img src="../../../public/yara-light.png" class="light-only" style="border-radius: 10px;" />
+            <img src="../../../public/yara-dark.png" class="dark-only" style="border-radius: 10px;" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- All projects grid -->
+    <section class="py-12">
+      <div class="container">
+        <span class="text-[10px] font-medium tracking-[0.08em] text-[#999] dark:text-[#5a5888] block mb-8">All projects</span>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+          <ProjectCard title="Kedward: RAG System for Carl Sagan\'s Cosmos" description="Kedward is an AI-powered system designed to provide insightful answers to questions about Carl Sagan\'s Cosmos. It combines the power of Large Language Models (LLMs) with a custom knowledge base to deliver accurate and context-aware responses." tag="RAG" icon="kedward" />
+          <ProjectCard title="Diver" description="Diver is an AI-powered chatbot that helps you navigate my tech blog. It can answer questions about my blog posts, my technology skills, and my projects. It can also help you by explaining complex concepts in simple terms and also in a friendly manner." tag="LLM" icon="diver" />
+          <ProjectCard title="Sentimetrix" description="Sentiment analysis tool that categorizes opinions, attitudes, and emotions from multiple sources using AI-powered algorithms — built with Python and Jupyter." tag="ML" icon="sentimetrix" />
+          <ProjectCard title="EchoGrowth: Growth Intelligence Platform" description="A data-driven platform designed to simulate, analyze, and optimize growth strategies. Combines analytical modeling with business metrics to support decision-making and performance optimization." tag="Data Science" icon="echogrowth" />
+          <ProjectCard title="GoldenLens – Intelligent Data Insights Engine" description="An intelligent system focused on extracting meaningful insights from data through analytical techniques and structured pipelines. Designed to transform raw data into actionable knowledge." tag="ML" icon="goldenlens" />
+          <ProjectCard title="Similarity Search Engine" description="A similarity-based search system that identifies and ranks items based on feature proximity. Useful for recommendation systems, clustering, and pattern recognition tasks." tag="Recommender System" icon="similarity" />
+        </div>
+      </div>
+    </section>
+
+  </div>
+</BaseLayout>

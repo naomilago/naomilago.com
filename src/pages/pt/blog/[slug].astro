@@ -1,0 +1,25 @@
+---
+import PostLayout from '../../../layouts/PostLayout.astro';
+import { getCollection } from 'astro:content';
+import { t } from '../../../i18n/utils';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map(post => ({
+    params: { slug: post.slug },
+    props: { entry: post },
+  }));
+}
+
+const { entry } = Astro.props;
+const lang = 'pt';
+const isOnlyEnglish = entry.data.lang === 'en';
+---
+
+<PostLayout entry={entry}>
+  {isOnlyEnglish && (
+    <div class="mb-6 px-4 py-3 bg-[#ede9f8] dark:bg-[#1e1a40] text-[#5c3fa3] dark:text-[#b89aec] rounded-lg text-[13px]">
+      {t(lang, 'post_only_english')}
+    </div>
+  )}
+</PostLayout>

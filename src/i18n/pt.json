@@ -1,0 +1,15 @@
+{
+  "nav_about": "Sobre",
+  "nav_blog": "Blog",
+  "nav_portfolio": "Portfólio",
+  "hero_pill": "Engenheira de IA",
+  "hero_headline": "Construindo sistemas inteligentes em escala.",
+  "hero_subtitle": "De pipelines de ML a agentes LLM — eu coloco em produção.",
+  "hero_btn_portfolio": "Portfólio",
+  "hero_btn_blog": "Blog →",
+  "featured_projects": "Projetos em destaque",
+  "see_all": "Ver todos →",
+  "post_only_english": "Este post está disponível apenas em inglês.",
+  "post_only_portuguese": "Este post está disponível apenas em português.",
+  "search_placeholder": "Pesquisar por título..."
+}

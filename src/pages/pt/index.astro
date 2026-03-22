@@ -1,0 +1,94 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Navbar from '../../components/Navbar.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+
+const lang = 'pt';
+
+const projects = [
+  {
+    title: 'Yara: Assistente Trans-Afirmativa',
+    desc:  'Yara é uma inteligência artificial trans-afirmativa disponível 24h pelo WhatsApp. Saúde, direitos e acolhimento para a comunidade trans e não-binária brasileira, sem julgamentos.',
+    tag: 'LangGraph', icon: 'yara',
+  },
+  {
+    title: 'Kedward: Sistema RAG para o Cosmos de Carl Sagan',
+    desc:  'Kedward é um sistema impulsionado por IA projetado para fornecer respostas perspicazes a perguntas sobre o "Cosmos" de Carl Sagan. Ele combina o poder dos Modelos de Linguagem de Grande Escala (LLMs) com uma base de conhecimento personalizada para entregar respostas precisas e contextualmente conscientes.',
+    tag: 'RAG', icon: 'kedward',
+  },
+  {
+    title: 'Diver',
+    desc:  'Diver é um chatbot impulsionado por IA que te ajuda a navegar pelo meu blog de tecnologia. Ele pode responder perguntas sobre meus posts, minhas habilidades tecnológicas e meus projetos. Também pode te ajudar explicando conceitos complexos de forma simples e amigável.',
+    tag: 'LLM', icon: 'diver',
+  },
+];
+---
+
+<BaseLayout
+  title="Naomi Lago — Engenheira de IA"
+  description="Portfólio com foco em Engenharia de IA, com projetos práticos de machine learning, sistemas de recomendação e pipelines de dados usando Python e PySpark.">
+
+  <Navbar lang={lang} />
+
+  <div class="page-body">
+
+    <section class="hero">
+      <div class="hero-left">
+        <div class="hero-left-content">
+
+          <span class="hero-pill">Engenheira de IA</span>
+
+          <h1 class="hero-h1">
+            Construindo sistemas<br>inteligentes em escala.
+          </h1>
+
+          <p class="hero-sub">
+            De pipelines de ML a agentes LLM — eu coloco em produção.
+          </p>
+
+          <div class="hero-tags">
+            <span class="tag">NLP</span>
+            <span class="tag">LLMs</span>
+            <span class="tag">Agents</span>
+            <span class="tag">PyTorch</span>
+            <span class="tag">PySpark</span>
+            <span class="tag">MLOps</span>
+          </div>
+
+          <div style="display:flex; gap:12px; flex-wrap:wrap;">
+            <a href="/pt/portfolio" class="btn-primary">Portfólio</a>
+            <a href="/pt/blog" class="btn-ghost">Blog →</a>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <pre class="hero-code"><span class="cmt"># pipeline multi-agente</span>
+<span class="kw">from</span> langgraph.graph <span class="kw">import</span> <span class="fn">StateGraph</span>
+
+graph = <span class="fn">StateGraph</span>(AgentState)
+graph.<span class="fn">add_node</span>(<span class="str">"planejador"</span>, planejar)
+graph.<span class="fn">add_node</span>(<span class="str">"executor"</span>, executar)
+graph.<span class="fn">add_edge</span>(<span class="str">"planejador"</span>, <span class="str">"executor"</span>)
+<span class="cmt"># linguagem é a interface ✦</span></pre>
+      </div>
+    </section>
+
+    <section class="projects">
+      <div class="projects-inner">
+        <div class="projects-header">
+          <span class="projects-label">Projetos em destaque</span>
+          <a href="/pt/portfolio" class="projects-see-all">Ver todos →</a>
+        </div>
+        <div class="projects-grid">
+          {projects.map(p => (
+            <ProjectCard title={p.title} description={p.desc} tag={p.tag} icon={p.icon} />
+          ))}
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+</BaseLayout>

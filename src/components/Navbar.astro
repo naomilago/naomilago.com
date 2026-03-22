@@ -1,0 +1,122 @@
+---
+interface Props {
+  lang: string;
+}
+const { lang } = Astro.props;
+
+const navLinks = lang === 'pt'
+  ? [
+      { href: '/pt/about',     label: 'Sobre'     },
+      { href: '/pt/blog',      label: 'Blog'      },
+      { href: '/pt/portfolio', label: 'Portfólio' },
+    ]
+  : [
+      { href: '/about',     label: 'About'     },
+      { href: '/blog',      label: 'Blog'      },
+      { href: '/portfolio', label: 'Portfolio' },
+    ];
+
+const homeHref    = lang === 'pt' ? '/pt' : '/';
+const currentPath = Astro.url.pathname;
+const altLangHref = lang === 'pt' 
+  ? currentPath.replace(/^\/pt/, '') || '/' 
+  : currentPath === '/' ? '/pt' : `/pt${currentPath}`;
+const altLangLabel = lang === 'pt' ? 'EN' : 'PT';
+---
+
+<nav class="navbar">
+  <div class="navbar-inner">
+
+    <!-- Logo -->
+    <a href={homeHref} class="navbar-logo">
+      Naomi Lago<span class="dot">.</span>
+    </a>
+
+    <!-- Desktop links -->
+    <div class="navbar-links">
+      {navLinks.map(link => (
+        <a href={link.href} class="navbar-link">{link.label}</a>
+      ))}
+      <a href={altLangHref} class="lang-pill">{altLangLabel}</a>
+      <button id="theme-toggle" class="theme-btn" aria-label="Toggle theme">
+        <!-- Sun (shown in dark mode) -->
+        <svg id="icon-sun" width="16" height="16" viewBox="0 0 16 16" fill="none" style="display:none">
+          <circle cx="8" cy="8" r="3.5" fill="currentColor"/>
+          <line x1="8" y1="1"    x2="8"    y2="2.5"  stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          <line x1="8" y1="13.5" x2="8"    y2="15"   stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          <line x1="1" y1="8"    x2="2.5"  y2="8"    stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          <line x1="13.5" y1="8" x2="15"   y2="8"    stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          <line x1="3.05" y1="3.05"   x2="4.11"  y2="4.11"  stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          <line x1="11.89" y1="11.89" x2="12.95" y2="12.95" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          <line x1="12.95" y1="3.05"  x2="11.89" y2="4.11"  stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          <line x1="4.11" y1="11.89"  x2="3.05"  y2="12.95" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <!-- Moon (shown in light mode) -->
+        <svg id="icon-moon" width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <path d="M13.5 9.5A5.5 5.5 0 016 2a5.5 5.5 0 107.5 7.5z" fill="currentColor"/>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Mobile right side -->
+    <div class="navbar-mobile">
+      <a href={altLangHref} class="lang-pill">{altLangLabel}</a>
+      <button id="theme-toggle-mobile" class="theme-btn" aria-label="Toggle theme">
+        <svg id="icon-sun-m" width="16" height="16" viewBox="0 0 16 16" fill="none" style="display:none">
+          <circle cx="8" cy="8" r="3.5" fill="currentColor"/>
+          <line x1="8" y1="1" x2="8" y2="2.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          <line x1="8" y1="13.5" x2="8" y2="15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          <line x1="1" y1="8" x2="2.5" y2="8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          <line x1="13.5" y1="8" x2="15" y2="8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <svg id="icon-moon-m" width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <path d="M13.5 9.5A5.5 5.5 0 016 2a5.5 5.5 0 107.5 7.5z" fill="currentColor"/>
+        </svg>
+      </button>
+      <button id="hamburger" class="hamburger" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+  </div>
+</nav>
+
+<!-- Mobile dropdown -->
+<div id="mobile-menu" class="mobile-menu">
+  {navLinks.map(link => (
+    <a href={link.href}>{link.label}</a>
+  ))}
+</div>
+
+<script>
+  // Update icon visibility based on current theme
+  function updateIcons() {
+    const isDark = document.documentElement.classList.contains('dark');
+    const sun  = document.getElementById('icon-sun');
+    const moon = document.getElementById('icon-moon');
+    const sunM  = document.getElementById('icon-sun-m');
+    const moonM = document.getElementById('icon-moon-m');
+    if (sun)  sun.style.display  = isDark ? 'block' : 'none';
+    if (moon) moon.style.display = isDark ? 'none'  : 'block';
+    if (sunM)  sunM.style.display  = isDark ? 'block' : 'none';
+    if (moonM) moonM.style.display = isDark ? 'none'  : 'block';
+  }
+
+  // Toggle theme
+  function toggleTheme() {
+    const isDark = document.documentElement.classList.toggle('dark');
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    updateIcons();
+  }
+
+  document.getElementById('theme-toggle')?.addEventListener('click', toggleTheme);
+  document.getElementById('theme-toggle-mobile')?.addEventListener('click', toggleTheme);
+
+  // Hamburger
+  document.getElementById('hamburger')?.addEventListener('click', () => {
+    document.getElementById('mobile-menu')?.classList.toggle('open');
+  });
+
+  // Init icons on load
+  updateIcons();
+</script>

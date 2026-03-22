@@ -1,0 +1,477 @@
+/* ─────────────────────────────────────────────────────────────────────────────
+   naomilago.com — global styles
+───────────────────────────────────────────────────────────────────────────── */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --pad: clamp(24px, 6vw, 120px);
+  --max-content: 1400px;
+
+  --bg:            #ffffff;
+  --bg-alt:        #fafafa;
+  --text-primary:  #150a35;
+  --text-muted:    #555555;
+  --text-hint:     #999999;
+  --border:        #e8e3f5;
+  --accent:        #7c5cbf;
+  --accent-bg:     #ede9f8;
+  --accent-text:   #5c3fa3;
+  --hero-right-bg: #f7f6fa;
+  --code-bg:       #ecebf6;
+  --code-text:     #2e244d;
+  --tag-bg:        #f0ecfc;
+  --tag-text:      #5c3fa3;
+}
+
+.dark {
+  --bg:            #0d0b1c;
+  --bg-alt:        #0f0d20;
+  --text-primary:  #e2dcff;
+  --text-muted:    #7a7aaa;
+  --text-hint:     #5a5888;
+  --border:        #1e1a38;
+  --accent-bg:     #1e1a40;
+  --accent-text:   #b89aec;
+  --hero-right-bg: #13112b;
+  --code-bg:       #0a0816;
+  --code-text:     #a090d0;
+  --tag-bg:        #1a1838;
+  --tag-text:      #a080e0;
+}
+
+/* Utility for theme-based visibility */
+.dark-only { display: none !important; }
+.dark .dark-only { display: block !important; }
+.dark .light-only { display: none !important; }
+
+html {
+  scroll-behavior: smooth;
+  height: 100%;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg);
+  color: var(--text-primary);
+  transition: background-color 0.2s ease, color 0.15s ease;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+}
+
+.container {
+  width: 100%;
+  max-width: var(--max-content);
+  margin: 0 auto;
+  padding: 0 var(--pad);
+}
+
+/* ─── Navbar ─────────────────────────────────────────────────────────────────── */
+
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background-color: var(--bg);
+  border-bottom: 0.5px solid var(--border);
+  height: 56px;
+  display: flex;
+  align-items: center;
+}
+
+.navbar-inner {
+  width: 100%;
+  max-width: var(--max-content);
+  margin: 0 auto;
+  padding: 0 var(--pad);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navbar-logo {
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  text-decoration: none;
+  color: var(--text-primary);
+  white-space: nowrap;
+}
+
+.navbar-logo .dot { color: #7c5cbf; }
+
+.navbar-links {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+.navbar-link {
+  font-size: 14px;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.navbar-link:hover { color: var(--text-primary); }
+
+.lang-pill {
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  padding: 4px 12px;
+  border-radius: 20px;
+  background-color: var(--accent-bg);
+  color: var(--accent-text);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.theme-btn {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: var(--text-muted);
+  transition: color 0.15s ease;
+}
+
+.theme-btn:hover { color: var(--text-primary); }
+
+.navbar-mobile {
+  display: none;
+  align-items: center;
+  gap: 12px;
+}
+
+.hamburger {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.hamburger span {
+  display: block;
+  width: 18px;
+  height: 1.5px;
+  background-color: var(--text-muted);
+  border-radius: 1px;
+}
+
+.mobile-menu {
+  display: none;
+  background-color: var(--bg);
+  border-bottom: 0.5px solid var(--border);
+}
+
+.mobile-menu.open { display: block; }
+
+.mobile-menu a {
+  display: block;
+  padding: 14px 24px;
+  font-size: 14px;
+  color: var(--text-primary);
+  text-decoration: none;
+  border-bottom: 0.5px solid var(--border);
+}
+
+.mobile-menu a:hover { background-color: var(--bg-alt); }
+
+/* ─── Hero ───────────────────────────────────────────────────────────────────── */
+
+.hero {
+  display: flex;
+  width: 100%;
+  flex: 1; /* grow to fill remaining space between navbar and projects */
+}
+
+.hero-left {
+  flex: 1;
+  background-color: var(--bg);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.hero-left-content {
+  width: 100%;
+  max-width: calc(var(--max-content) / 2);
+  padding: clamp(48px, 8vh, 80px) var(--pad);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.hero-right {
+  flex: 1;
+  background-color: var(--hero-right-bg);
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: clamp(48px, 8vh, 80px) var(--pad) clamp(48px, 8vh, 80px) calc(var(--pad) * 0.75);
+}
+
+/* ─── Hero typography ────────────────────────────────────────────────────────── */
+
+.hero-pill {
+  display: inline-block;
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  padding: 4px 12px;
+  border-radius: 20px;
+  background-color: var(--accent-bg);
+  color: var(--accent-text);
+  margin-bottom: 18px;
+}
+
+.hero-h1 {
+  font-size: clamp(24px, 1.8vw, 36px);
+  font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+  margin-bottom: 12px;
+}
+
+.hero-sub {
+  font-size: clamp(13px, 0.85vw, 15px);
+  line-height: 1.7;
+  color: var(--text-muted);
+  margin-bottom: 20px;
+}
+
+.hero-tags {
+  display: grid;
+  grid-template-columns: repeat(3, max-content);
+  gap: 5px;
+  margin-bottom: 24px;
+}
+
+/* ─── Hero code block ────────────────────────────────────────────────────────── */
+
+.hero-code {
+  background-color: var(--code-bg);
+  color: var(--code-text);
+  border-radius: 12px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: clamp(11px, 0.75vw, 13px);
+  line-height: 1.8;
+  overflow-x: auto;
+  padding: 24px 28px;
+  margin: 0;
+  border: 1px solid rgba(124, 92, 191, 0.1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+  width: 100%;
+  max-width: 480px;
+}
+
+.hero-code .cmt { color: #8e8bb3; }
+.hero-code .kw  { color: #6b3fc0; font-weight: 500; }
+.hero-code .fn  { color: #1a60ad; }
+.hero-code .str { color: #228042; }
+
+.dark .hero-code .kw  { color: #c4a8ff; }
+.dark .hero-code .fn  { color: #88c0e8; }
+.dark .hero-code .str { color: #8ed4a4; }
+
+/* ─── Tags ───────────────────────────────────────────────────────────────────── */
+
+.tag {
+  display: inline-block;
+  background-color: var(--tag-bg);
+  color: var(--tag-text);
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  padding: 3px 8px;
+  border-radius: 4px;
+}
+
+/* ─── Buttons ────────────────────────────────────────────────────────────────── */
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  background-color: #7c5cbf;
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 9px 20px;
+  border-radius: 8px;
+  border: none;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: opacity 0.15s ease;
+  cursor: pointer;
+}
+
+.btn-primary:hover { opacity: 0.85; }
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  background-color: transparent;
+  border: 1px solid #c4b0e8;
+  color: #7c5cbf;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 9px 20px;
+  border-radius: 8px;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background-color 0.15s ease;
+  cursor: pointer;
+}
+
+.dark .btn-ghost {
+  border-color: #3a2e60;
+  color: #b89aec;
+}
+
+.btn-ghost:hover { background-color: rgba(124, 92, 191, 0.08); }
+
+/* ─── Featured projects ──────────────────────────────────────────────────────── */
+
+.projects {
+  width: 100%;
+  background-color: var(--bg-alt);
+  border-top: 0.5px solid var(--border);
+  padding: 40px 0;
+}
+
+.projects-inner {
+  width: 100%;
+  max-width: var(--max-content);
+  margin: 0 auto;
+  padding: 0 var(--pad);
+}
+
+.projects-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.projects-label {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  color: var(--text-hint);
+}
+
+.projects-see-all {
+  font-size: 12px;
+  color: #7c5cbf;
+  text-decoration: none;
+}
+
+.dark .projects-see-all { color: #a07ee0; }
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+/* ─── Blog / Shiki ───────────────────────────────────────────────────────────── */
+
+.astro-code {
+  border-radius: 8px;
+  padding: 1.25rem 1.5rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  line-height: 1.75;
+  overflow-x: auto;
+  margin: 1.5rem 0;
+  width: 100%;
+}
+
+:not(pre) > code {
+  background-color: #313244;
+  color: #cdd6f4;
+  border-radius: 4px;
+  padding: 2px 6px;
+  font-size: 0.875em;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.prose-post pre:not(.astro-code) {
+  background-color: #181825;
+  color: #a6adc8;
+  border-radius: 8px;
+  padding: 1rem 1.25rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  line-height: 1.65;
+  overflow-x: auto;
+  margin: 1rem 0;
+  border: 0.5px solid #313244;
+}
+
+/* ─── Responsive ─────────────────────────────────────────────────────────────── */
+
+@media (max-width: 767px) {
+  .navbar-links  { display: none; }
+  .navbar-mobile { display: flex; }
+
+  .hero {
+    flex-direction: column;
+    min-height: auto;
+    max-height: none;
+  }
+
+  .hero-left {
+    justify-content: flex-start;
+    order: 1;
+  }
+
+  .hero-left-content {
+    max-width: 100%;
+    padding: 40px 24px;
+  }
+
+  .hero-right {
+    order: 2;
+    justify-content: center;
+    padding: 36px 24px;
+    min-height: 280px;
+  }
+
+  .hero-code { max-width: 100%; }
+
+  .projects-grid { grid-template-columns: 1fr; }
+}
+
+/* ─── Page body (home only) ──────────────────────────────────────────────────── */
+
+.page-body {
+  display: flex;
+  flex-direction: column;
+  flex: 1; /* fills all space between navbar and bottom of viewport */
+  min-height: 0;
+}
+
+.page-body .hero {
+  flex: 1; /* hero grows, projects stay natural height */
+  min-height: 0;
+}

@@ -1,0 +1,106 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Navbar from '../../components/Navbar.astro';
+import { t } from '../../i18n/utils';
+
+const lang = 'pt';
+
+const skills = [
+  { name: 'Python', pct: 99 },
+  { name: 'NLP / LLMs', pct: 86 },
+  { name: 'RAG', pct: 80 },
+  { name: 'PySpark', pct: 94 },
+  { name: 'LangGraph', pct: 83 },
+  { name: 'PyTorch', pct: 78 },
+  { name: 'SQL', pct: 91 },
+  { name: 'MLOps', pct: 75 },
+];
+---
+
+<BaseLayout title="Sobre — Naomi Lago" description="Engenheira de IA com mais de 4 anos construindo sistemas NLP, agentes LLM e ML em larga escala.">
+  <Navbar lang={lang} />
+
+  <div class="page-body">
+    <!-- Hero bio -->
+    <section class="bg-[#f4f2fb] dark:bg-[#0f0d20] border-b border-[#e8e3f5] dark:border-[#1e1a38] py-14">
+      <div class="container">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+          <div>
+            <span class="inline-block mb-4 bg-[#ede9f8] dark:bg-[#1e1a40] text-[#5c3fa3] dark:text-[#b89aec] text-[9px] font-medium tracking-[0.08em] px-3 py-1 rounded-full">
+              Engenheira de IA
+            </span>
+            <h1 class="text-[28px] font-medium tracking-[-0.02em] text-[#150a35] dark:text-[#e2dcff] mb-4 leading-snug">
+              Oi, sou a Naomi —<br>construo coisas que pensam.
+            </h1>
+            <p class="text-[14px] text-[#555] dark:text-[#7a7aaa] leading-[1.75] max-w-[520px]">
+              Engenheira de IA com mais de 4 anos trabalhando com dados, construindo sistemas e pipelines de machine learning escaláveis. Atualmente focada em NLP, aplicações de LLM e IA pronta para produção.
+            </p>
+          </div>
+          <div class="flex justify-center md:justify-end">
+            <div class="w-[160px] h-[160px] bg-[#ede9f8] dark:bg-[#1e1a40] rounded-[12px] flex items-center justify-center">
+              <img src='../../public/profile.jpeg' style='border-radius: 12px;' />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Experience -->
+    <section class="py-14 border-b border-[#e8e3f5] dark:border-[#1e1a38]">
+      <div class="container">
+        <span class="text-[10px] font-medium tracking-[0.08em] text-[#999] dark:text-[#5a5888] block mb-8">Experience</span>
+        <div class="space-y-6 max-w-[640px]">
+          <!-- Item -->
+          <div class="grid grid-cols-[80px_1fr] gap-6 items-start">
+            <span class="text-[12px] font-medium text-[#7c5cbf] dark:text-[#b89aec] text-right pt-0.5">2022 – 2026</span>
+            <div>
+              <p class="text-[14px] font-medium text-[#150a35] dark:text-[#e2dcff] mb-0.5">Cientista de Dados · Nestlé</p>
+              <p class="text-[12px] text-[#777] dark:text-[#6868a0]">Atuei como Cientista de Dados em múltiplos times da Nestlé, desenvolvendo soluções de NLP como análise de sentimento e tagueamento de mensagens. Contribuí para sistemas de priorização B2B e recomendação de pedidos, utilizando segmentação de negócio e análise RFV, com foco na melhoria da eficiência operacional. Aprofundei meus conhecimentos em modelos probabilísticos, Deep Learning, MLflow e pipelines de Ciência de Dados por meio de projetos de alto impacto em produção.</p>
+            </div>
+          </div>
+          <div class="grid grid-cols-[80px_1fr] gap-6 items-start">
+            <span class="text-[12px] font-medium text-[#7c5cbf] dark:text-[#b89aec] text-right pt-0.5">2022 – 2023</span>
+            <div>
+              <p class="text-[14px] font-medium text-[#150a35] dark:text-[#e2dcff] mb-0.5">Analista de Ciência de Dados · Nestlé</p>
+              <p class="text-[12px] text-[#777] dark:text-[#6868a0]">Iniciei como parte da primeira turma de formação em Ciência de Dados, com conclusão em fevereiro de 2023. Adquiri experiência prática em coleta de dados (incluindo web scraping), análise exploratória de dados (EDA), limpeza e preparação de dados, engenharia de atributos e avaliação de modelos. Nesse período, identifiquei um forte interesse em Inteligência Artificial, especialmente em aplicações de Processamento de Linguagem Natural (NLP).</p>
+            </div>
+          </div>
+          <div class="grid grid-cols-[80px_1fr] gap-6 items-start">
+            <span class="text-[12px] font-medium text-[#7c5cbf] dark:text-[#b89aec] text-right pt-0.5">2022 – 2022</span>
+            <div>
+              <p class="text-[14px] font-medium text-[#150a35] dark:text-[#e2dcff] mb-0.5">Designer de UX/UI · Cliqx</p>
+              <p class="text-[12px] text-[#777] dark:text-[#6868a0]"></p>
+            </div>
+          </div>
+          <div class="grid grid-cols-[80px_1fr] gap-6 items-start">
+            <span class="text-[12px] font-medium text-[#7c5cbf] dark:text-[#b89aec] text-right pt-0.5">2021 – 2022</span>
+            <div>
+              <p class="text-[14px] font-medium text-[#150a35] dark:text-[#e2dcff] mb-0.5">Analista Help Desk · Cliqx</p>
+              <p class="text-[12px] text-[#777] dark:text-[#6868a0]"></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills -->
+    <section class="py-14">
+      <div class="container">
+        <span class="text-[10px] font-medium tracking-[0.08em] text-[#999] dark:text-[#5a5888] block mb-8">Habilidades</span>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+          {skills.map(skill => (
+            <div class="bg-white dark:bg-[#12102a] border border-[#e8e3f5] dark:border-[#22203a] rounded-xl p-4">
+              <div class="flex justify-between items-center mb-3">
+                <span class="text-[13px] font-medium text-[#150a35] dark:text-[#e2dcff]">{skill.name}</span>
+                <span class="text-[11px] text-[#999] dark:text-[#5a5888]">{skill.pct}%</span>
+              </div>
+              <div class="h-[3px] bg-[#e8e3f5] dark:bg-[#22203a] rounded-full overflow-hidden">
+                <div class="h-full bg-[#7c5cbf] rounded-full" style={`width: ${skill.pct}%`}></div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  </div>
+</BaseLayout>

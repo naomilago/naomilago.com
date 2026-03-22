@@ -1,0 +1,85 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Navbar from '../components/Navbar.astro';
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+const lang = Astro.currentLocale ?? 'en';
+---
+<BaseLayout title={`${entry.data.title} — Naomi Lago`} description={entry.data.excerpt}>
+  <Navbar lang={lang} />
+  <div class="page-body">
+    <div class="container py-16 px-6">
+      <!-- Post header -->
+      <div class="max-w-[680px] mx-auto">
+        <div class="flex gap-2 mb-4 flex-wrap">
+          {entry.data.tags.map((tag: string) => (
+            <span class="inline-block bg-[#f0ecfc] dark:bg-[#1a1838] text-[#5c3fa3] dark:text-[#a080e0] text-[9px] font-medium tracking-[0.06em] px-2 py-1 rounded-sm uppercase">
+              {tag}
+            </span>
+          ))}
+        </div>
+        <h1 class="text-[28px] font-medium tracking-[-0.02em] text-[#150a35] dark:text-[#e2dcff] mb-3 leading-snug">
+          {entry.data.title}
+        </h1>
+        <div class="flex items-center gap-3 mb-10">
+          <span class="text-[12px] text-[#999] dark:text-[#5a5888]">{entry.data.date}</span>
+          <span class="text-[#e8e3f5] dark:text-[#22203a]">·</span>
+          <span class="text-[12px] text-[#999] dark:text-[#5a5888]">{entry.data.readTime}</span>
+        </div>
+      </div>
+
+      <!-- Post content -->
+      <article class="max-w-[680px] mx-auto prose-naomi">
+        <Content />
+      </article>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .prose-naomi :global(p) {
+    font-size: 14px;
+    line-height: 1.75;
+    color: #555555;
+    margin-bottom: 1.25rem;
+  }
+  .prose-naomi :global(h2) {
+    font-size: 18px;
+    font-weight: 500;
+    color: #150a35;
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+    letter-spacing: -0.01em;
+  }
+  .prose-naomi :global(h3) {
+    font-size: 15px;
+    font-weight: 500;
+    color: #150a35;
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+  .prose-naomi :global(img) {
+    width: 100%;
+    border-radius: 8px;
+    margin: 1.5rem 0;
+  }
+  .prose-naomi :global(ul) {
+    list-style: disc;
+    padding-left: 1.5rem;
+    margin-bottom: 1.25rem;
+  }
+  .prose-naomi :global(li) {
+    font-size: 14px;
+    line-height: 1.75;
+    color: #555555;
+    margin-bottom: 0.25rem;
+  }
+  :global(.dark) .prose-naomi :global(p),
+  :global(.dark) .prose-naomi :global(li) {
+    color: #7a7aaa;
+  }
+  :global(.dark) .prose-naomi :global(h2),
+  :global(.dark) .prose-naomi :global(h3) {
+    color: #e2dcff;
+  }
+</style>

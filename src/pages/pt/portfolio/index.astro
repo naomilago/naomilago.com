@@ -1,0 +1,131 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Navbar from '../../../components/Navbar.astro';
+import ProjectCard from '../../../components/ProjectCard.astro';
+
+const lang = 'pt';
+
+const projects = [
+  {
+    title: 'Kedward: Sistema RAG para o Cosmos de Carl Sagan',
+    desc: 'Kedward é um sistema impulsionado por IA projetado para fornecer respostas perspicazes a perguntas sobre o "Cosmos" de Carl Sagan. Ele combina o poder dos Modelos de Linguagem de Grande Escala (LLMs) com uma base de conhecimento personalizada para entregar respostas precisas e contextualmente conscientes.',
+    tag: 'RAG',
+    icon: 'kedward',
+  },
+  {
+    title: 'Diver',
+    desc: 'Diver é um chatbot impulsionado por IA que te ajuda a navegar pelo meu blog de tecnologia. Ele pode responder perguntas sobre meus posts, minhas habilidades tecnológicas e meus projetos. Também pode te ajudar explicando conceitos complexos de forma simples e amigável.',
+    tag: 'LLM',
+    icon: 'diver',
+  },
+  {
+    title: 'Sentimetrix',
+    desc: 'Ferramenta de análise de sentimentos que classifica opiniões, atitudes e emoções a partir de múltiplas fontes utilizando algoritmos de IA — desenvolvida com Python e Jupyter.',
+    tag: 'ML',
+    icon: 'sentimetrix',
+  },
+  {
+    title: 'EchoGrowth: Plataforma de Inteligência de Crescimento',
+    desc: 'Uma plataforma orientada a dados para simular, analisar e otimizar estratégias de crescimento. Combina modelagem analítica com métricas de negócio para apoiar decisões e melhorar a performance.',
+    tag: 'Ciência de Dados',
+    icon: 'echogrowth',
+  },
+  {
+    title: 'GoldenLens – Motor Inteligente de Insights de Dados',
+    desc: 'Um sistema inteligente focado em extrair insights relevantes a partir de dados, utilizando técnicas analíticas e pipelines estruturados. Transforma dados brutos em conhecimento acionável.',
+    tag: 'ML',
+    icon: 'goldenlens',
+  },
+  {
+    title: 'Sistema de Busca por Similaridade',
+    desc: 'Um sistema de busca baseado em similaridade que identifica e classifica itens com base na proximidade de características. Aplicável em recomendação, clustering e reconhecimento de padrões.',
+    tag: 'Sistema de Recomendação',
+    icon: 'similarity',
+  },
+];
+---
+
+<BaseLayout
+  title="Portfólio — Naomi Lago"
+  description="Projetos em NLP, agentes LLM, machine learning em escala e MLOps."
+>
+  <Navbar lang={lang} />
+
+  <div class="page-body">
+    <!-- Page header -->
+    <section class="bg-[#f4f2fb] dark:bg-[#0f0d20] border-b border-[#e8e3f5] dark:border-[#1e1a38] py-12">
+      <div class="container">
+        <span class="inline-block mb-4 bg-[#ede9f8] dark:bg-[#1e1a40] text-[#5c3fa3] dark:text-[#b89aec] text-[9px] font-medium tracking-[0.08em] px-3 py-1 rounded-full">
+          Trabalhos
+        </span>
+        <h1 class="text-[28px] font-medium tracking-[-0.02em] text-[#150a35] dark:text-[#e2dcff] mb-3">
+          Portfólio
+        </h1>
+        <p class="text-[14px] text-[#555] dark:text-[#7a7aaa]">
+          Sistemas de ML, agentes LLM e pipelines de dados em escala.
+        </p>
+      </div>
+    </section>
+
+    <!-- Featured project -->
+    <section class="border-b border-[#e8e3f5] dark:border-[#1e1a38] py-12">
+      <div class="container">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-0 rounded-xl overflow-hidden border border-[#e8e3f5] dark:border-[#22203a]">
+          <!-- Left -->
+          <div class="bg-white dark:bg-[#12102a] p-8 md:p-10 flex flex-col justify-center">
+            <span class="inline-block self-start mb-4 bg-[#ede9f8] dark:bg-[#1e1a40] text-[#5c3fa3] dark:text-[#b89aec] text-[9px] font-medium tracking-[0.08em] px-3 py-1 rounded-full">
+              Destaque
+            </span>
+
+            <h2 class="text-[22px] font-medium tracking-[-0.02em] text-[#150a35] dark:text-[#e2dcff] mb-3 leading-snug">
+              Yara: Assistente Trans-Afirmativa
+            </h2>
+
+            <p class="text-[14px] text-[#555] dark:text-[#7a7aaa] leading-[1.75] mb-5">
+              Uma assistente de IA trans-afirmativa disponível 24 horas por dia no WhatsApp, construída com um agente LangGraph e um conjunto de ferramentas especializadas. Oferece suporte emocional aliado a informações precisas sobre saúde trans no SUS, direitos legais e orientações sobre transição — com respostas de voz humanizadas via ElevenLabs TTS. Implantada no Google Cloud Run com backend em FastAPI e frontend em React.
+            </p>
+
+            <div class="flex gap-2 mb-6 flex-wrap">
+              {['LangGraph', 'RAG', 'GCP', 'AIOps'].map(tag => (
+                <span class="text-[9px] font-medium tracking-[0.06em] bg-[#f0ecfc] dark:bg-[#1a1838] text-[#5c3fa3] dark:text-[#a080e0] px-2 py-1 rounded-sm uppercase">
+                  {tag}
+                </span>
+              ))}
+            </div>
+
+            <div class="flex gap-3">
+              <a href="https://souyara.com.br/" target="_blank" class="btn-primary">Ver projeto</a>
+              <a href="https://github.com/naomilago/Yara" target="_blank" class="btn-ghost">GitHub →</a>
+            </div>
+          </div>
+
+          <!-- Right -->
+          <div class="bg-[#f7f6fa] dark:bg-[#13112b] p-8 md:p-10 flex items-center">
+            <img src="../../../public/yara-light.png" class="light-only" style="border-radius: 10px;" alt="Interface do projeto Yara no tema claro" />
+            <img src="../../../public/yara-dark.png" class="dark-only" style="border-radius: 10px;" alt="Interface do projeto Yara no tema escuro" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- All projects grid -->
+    <section class="py-12">
+      <div class="container">
+        <span class="text-[10px] font-medium tracking-[0.08em] text-[#999] dark:text-[#5a5888] block mb-8">
+          Todos os projetos
+        </span>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+          {projects.map((p) => (
+            <ProjectCard
+              title={p.title}
+              description={p.desc}
+              tag={p.tag}
+              icon={p.icon}
+            />
+          ))}
+        </div>
+      </div>
+    </section>
+  </div>
+</BaseLayout>
