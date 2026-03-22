@@ -1,4 +1,6 @@
 ---
+import '../styles/global.css';
+
 const { title = 'Naomi Lago', description = '' } = Astro.props;
 const lang = Astro.currentLocale ?? 'en';
 ---
@@ -21,7 +23,6 @@ const lang = Astro.currentLocale ?? 'en';
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/src/styles/global.css" />
 </head>
 <body>
   <slot />
