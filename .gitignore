@@ -22,3 +22,11 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# Raw Jupyter notebooks' code for blog posts
+src/content/blog/.venv
+src/content/blog/.python-version
+src/content/blog/main.py 
+src/content/blog/pyproject.toml
+src/content/blog/uv.lock
+src/content/blog/*.ipynb

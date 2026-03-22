@@ -8,9 +8,17 @@ import { t } from '../../i18n/utils';
 
 const lang = Astro.currentLocale ?? 'en';
 const allPosts = await getCollection('blog');
-const posts = allPosts
-  .filter(p => p.data.lang === lang)
-  .sort((a, b) => new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf());
+const enPosts = allPosts.filter(p => p.data.lang === 'en');
+const enReferences = new Set(enPosts.map(p => p.data.reference).filter(Boolean));
+
+const posts = allPosts.filter(p => {
+  if (p.data.lang === 'en') return true;
+  if (p.data.lang === 'pt') {
+    if (p.data.reference && enReferences.has(p.data.reference)) return false;
+    return true;
+  }
+  return false;
+}).sort((a, b) => new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf());
 
 const allTags = ['All', ...Array.from(new Set(posts.flatMap(p => p.data.tags)))];
 ---
@@ -54,19 +62,25 @@ const allTags = ['All', ...Array.from(new Set(posts.flatMap(p => p.data.tags)))]
 
         <!-- Post list -->
         <div id="post-list">
-          {posts.map(post => (
-            <div class="post-item" data-tags={post.data.tags.join(',')} data-title={post.data.title.toLowerCase()}>
-              <BlogPostRow
-                title={post.data.title}
-                excerpt={post.data.excerpt}
-                date={post.data.date}
-                readTime={post.data.readTime}
-                tags={post.data.tags}
-                slug={post.slug}
-                lang={lang}
-              />
-            </div>
-          ))}
+          {posts.map(post => {
+            const isOnlyPortuguese = post.data.lang === 'pt';
+            return (
+              <div class="post-item" data-tags={post.data.tags.join(',')} data-title={post.data.title.toLowerCase()}>
+                <BlogPostRow
+                  title={post.data.title}
+                  excerpt={post.data.excerpt}
+                  date={post.data.date}
+                  readTime={post.data.readTime}
+                  tags={post.data.tags}
+                  slug={post.slug}
+                  lang={lang}
+                />
+                {isOnlyPortuguese && (
+                  <p class="text-[11px] text-[#7c5cbf] dark:text-[#b89aec] mb-1 -mt-2 px-0">{t(lang, 'post_only_portuguese')}</p>
+                )}
+              </div>
+            );
+          })}
         </div>
 
         {posts.length === 0 && (

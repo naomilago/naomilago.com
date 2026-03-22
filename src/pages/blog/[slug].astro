@@ -1,25 +1,45 @@
 ---
 import PostLayout from '../../layouts/PostLayout.astro';
 import { getCollection } from 'astro:content';
+import { t } from '../../i18n/utils';
 
 export async function getStaticPaths() {
-  const posts = await getCollection('blog');
-  const enPosts = posts.filter(p => p.data.lang === 'en');
-  return enPosts.map(post => ({
+  const allPosts = await getCollection('blog');
+  const enPosts = allPosts.filter(p => p.data.lang === 'en');
+  const enReferences = new Set(enPosts.map(p => p.data.reference).filter(Boolean));
+
+  const postsToGenerate = allPosts.filter(p => {
+    if (p.data.lang === 'en') return true;
+    if (p.data.lang === 'pt') {
+      if (p.data.reference && enReferences.has(p.data.reference)) return false;
+      return true;
+    }
+    return false;
+  });
+
+  return postsToGenerate.map(post => ({
     params: { slug: post.slug },
-    props: { entry: post, allPosts: posts },
+    props: { entry: post, allPosts },
   }));
 }
 
 const { entry, allPosts } = Astro.props;
 const lang = Astro.currentLocale ?? 'en';
+const isOnlyPortuguese = entry.data.lang === 'pt';
 
 const translatedPost = entry.data.reference 
   ? allPosts.find(p => p.data.reference === entry.data.reference && p.data.lang === 'pt')
   : null;
 
-const altHref = translatedPost ? `/pt/blog/${translatedPost.slug}` : '/pt/blog';
+const altHref = isOnlyPortuguese 
+  ? `/pt/blog/${entry.slug}`
+  : (translatedPost ? `/pt/blog/${translatedPost.slug}` : '/pt/blog');
 ---
 
 <PostLayout entry={entry} altHref={altHref}>
+  {isOnlyPortuguese && (
+    <div class="mb-6 px-4 py-3 bg-[#ede9f8] dark:bg-[#1e1a40] text-[#5c3fa3] dark:text-[#b89aec] rounded-lg text-[13px]">
+      {t(lang, 'post_only_portuguese')}
+    </div>
+  )}
 </PostLayout>

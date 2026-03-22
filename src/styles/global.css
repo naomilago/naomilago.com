@@ -407,17 +407,22 @@ body {
 }
 
 :not(pre) > code {
-  background-color: #313244;
-  color: #cdd6f4;
+  background-color: #e6e9ef; /* Latte mantle */
+  color: #4c4f69; /* Latte text */
   border-radius: 4px;
   padding: 2px 6px;
   font-size: 0.875em;
   font-family: 'JetBrains Mono', monospace;
 }
 
+.dark :not(pre) > code {
+  background-color: #313244;
+  color: #cdd6f4;
+}
+
 .prose-post pre:not(.astro-code) {
-  background-color: #181825;
-  color: #a6adc8;
+  background-color: #eff1f5;
+  color: #4c4f69;
   border-radius: 8px;
   padding: 1rem 1.25rem;
   font-family: 'JetBrains Mono', monospace;
@@ -425,7 +430,23 @@ body {
   line-height: 1.65;
   overflow-x: auto;
   margin: 1rem 0;
-  border: 0.5px solid #313244;
+  border: 0.5px solid #dce0e8;
+}
+
+.dark .prose-post pre:not(.astro-code) {
+  background-color: #181825;
+  color: #a6adc8;
+  border-color: #313244;
+}
+
+/* Force Shiki to use dark mode variables when .dark is active */
+html.dark .astro-code,
+html.dark .astro-code span {
+  color: var(--shiki-dark) !important;
+  background-color: var(--shiki-dark-bg) !important;
+  font-style: var(--shiki-dark-font-style) !important;
+  font-weight: var(--shiki-dark-font-weight) !important;
+  text-decoration: var(--shiki-dark-text-decoration) !important;
 }
 
 /* ─── Responsive ─────────────────────────────────────────────────────────────── */
