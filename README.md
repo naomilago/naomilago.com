@@ -1,43 +1,101 @@
-# Astro Starter Kit: Minimal
+# naomilago.com
 
-```sh
-npm create astro@latest -- --template minimal
-```
+Personal website, blog & portfolio — built with Astro, Tailwind CSS, and deployed on Vercel.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+---
 
-## 🚀 Project Structure
+<br>
 
-Inside of your Astro project, you'll see the following folders and files:
+<div align="center">
+  <img src="public/homepage-light.png" style="border-radius: 12px;" width="900" />
+</div>
+
+<br>
+
+---
+
+## Stack
+
+- **Framework:** [Astro 4](https://astro.build/)
+- **Styling:** [Tailwind CSS](https://tailwindcss.com/)
+- **Fonts:** Inter + JetBrains Mono via Google Fonts
+- **Syntax highlighting:** Shiki (Catppuccin Mocha theme)
+- **Deployment:** [Vercel](https://vercel.com/)
+- **i18n:** English & Brazilian Portuguese
+
+---
+
+## Project structure
 
 ```text
 /
 ├── public/
 ├── src/
-│   └── pages/
-│       └── index.astro
+│   ├── components/
+│   │   ├── Navbar.astro
+│   │   ├── ProjectCard.astro
+│   │   └── BlogPostRow.astro
+│   ├── content/
+│   │   └── blog/
+│   ├── i18n/
+│   │   ├── en.json
+│   │   └── pt.json
+│   ├── layouts/
+│   │   ├── BaseLayout.astro
+│   │   └── PostLayout.astro
+│   ├── pages/
+│   │   ├── index.astro
+│   │   ├── about.astro
+│   │   ├── portfolio/
+│   │   ├── blog/
+│   │   └── pt/
+│   └── styles/
+│       └── global.css
 └── package.json
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+---
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+## Commands
 
-Any static assets, like images, can be placed in the `public/` directory.
+All commands are run from the root of the project:
 
-## 🧞 Commands
+| Command           | Action                                      |
+| :---------------- | :------------------------------------------ |
+| `npm install`     | Install dependencies                        |
+| `npm run dev`     | Start local dev server at `localhost:4321`  |
+| `npm run build`   | Build production site to `./dist/`          |
+| `npm run preview` | Preview production build locally            |
 
-All commands are run from the root of the project, from a terminal:
+---
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+## Publishing a blog post
 
-## 👀 Want to learn more?
+Create a `.md` file in `src/content/blog/` with the following frontmatter:
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+```yaml
+---
+title: ''
+date: ''
+tags: []
+excerpt: ''
+lang: 'en'       # 'en' or 'pt'
+readTime: ''
+---
+```
+
+Posts can be written in English or Portuguese — no translation required. If a post only exists in one language, a notice is shown to readers in the other language.
+
+To publish a Jupyter notebook, convert it first:
+
+```bash
+jupyter nbconvert --to markdown notebook.ipynb
+```
+
+Then add the frontmatter and commit the `.md` file.
+
+---
+
+## License
+
+MIT
