@@ -38,10 +38,10 @@ Data Science geralmente é composta pelas seguintes etapas:
 
 Agora que você entende o que é Data Science, pode se interessar em explorar algumas funções relacionadas:
 
-- Engenheiro de Dados  
+- Engenheiro(a) de Dados  
 - Analista de Dados  
 - Cientista de Dados  
-- Gestor de Dados  
+- Gestor(a) de Dados  
 
 <br>
 
@@ -49,4 +49,4 @@ Agora que você entende o que é Data Science, pode se interessar em explorar al
 
 <br>
 
-Obrigado pela leitura, até a próxima ⭐
+Obrigada pela leitura, até a próxima ⭐
