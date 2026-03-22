@@ -1,8 +1,9 @@
 ---
 interface Props {
   lang: string;
+  altHref?: string;
 }
-const { lang } = Astro.props;
+const { lang, altHref } = Astro.props;
 
 const navLinks = lang === 'pt'
   ? [
@@ -18,9 +19,9 @@ const navLinks = lang === 'pt'
 
 const homeHref    = lang === 'pt' ? '/pt' : '/';
 const currentPath = Astro.url.pathname;
-const altLangHref = lang === 'pt' 
+const altLangHref = altHref ?? (lang === 'pt' 
   ? currentPath.replace(/^\/pt/, '') || '/' 
-  : currentPath === '/' ? '/pt' : `/pt${currentPath}`;
+  : currentPath === '/' ? '/pt' : `/pt${currentPath}`);
 const altLangLabel = lang === 'pt' ? 'EN' : 'PT';
 ---
 

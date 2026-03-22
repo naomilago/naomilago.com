@@ -8,7 +8,9 @@ import { t } from '../../i18n/utils';
 
 const lang = Astro.currentLocale ?? 'en';
 const allPosts = await getCollection('blog');
-const posts = allPosts.sort((a, b) => new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf());
+const posts = allPosts
+  .filter(p => p.data.lang === lang)
+  .sort((a, b) => new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf());
 
 const allTags = ['All', ...Array.from(new Set(posts.flatMap(p => p.data.tags)))];
 ---

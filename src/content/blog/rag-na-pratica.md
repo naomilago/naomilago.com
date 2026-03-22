@@ -5,6 +5,7 @@ tags: ['NLP', 'Python', 'MLOps']
 excerpt: 'Como construí um motor de busca semântica com embeddings de sentenças e FAISS, e o que aprendi sobre tradeoffs de recall vs. latência em produção.'
 lang: 'pt'
 readTime: '5 min de leitura'
+reference: 'rag-practice'
 ---
 
 ## O problema

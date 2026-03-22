@@ -4,19 +4,39 @@ import { getCollection } from 'astro:content';
 import { t } from '../../../i18n/utils';
 
 export async function getStaticPaths() {
-  const posts = await getCollection('blog');
-  return posts.map(post => ({
+  const allPosts = await getCollection('blog');
+  const ptPosts = allPosts.filter(p => p.data.lang === 'pt');
+  const ptReferences = new Set(ptPosts.map(p => p.data.reference).filter(Boolean));
+
+  const postsToGenerate = allPosts.filter(p => {
+    if (p.data.lang === 'pt') return true;
+    if (p.data.lang === 'en') {
+      if (p.data.reference && ptReferences.has(p.data.reference)) return false;
+      return true;
+    }
+    return false;
+  });
+
+  return postsToGenerate.map(post => ({
     params: { slug: post.slug },
-    props: { entry: post },
+    props: { entry: post, allPosts },
   }));
 }
 
-const { entry } = Astro.props;
+const { entry, allPosts } = Astro.props;
 const lang = 'pt';
 const isOnlyEnglish = entry.data.lang === 'en';
+
+const translatedPost = entry.data.reference 
+  ? allPosts.find(p => p.data.reference === entry.data.reference && p.data.lang === 'en')
+  : null;
+
+const altHref = isOnlyEnglish 
+  ? `/blog/${entry.slug}`
+  : (translatedPost ? `/blog/${translatedPost.slug}` : '/blog');
 ---
 
-<PostLayout entry={entry}>
+<PostLayout entry={entry} altHref={altHref}>
   {isOnlyEnglish && (
     <div class="mb-6 px-4 py-3 bg-[#ede9f8] dark:bg-[#1e1a40] text-[#5c3fa3] dark:text-[#b89aec] rounded-lg text-[13px]">
       {t(lang, 'post_only_english')}

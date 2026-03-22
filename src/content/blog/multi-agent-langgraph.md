@@ -5,6 +5,7 @@ tags: ['Agents', 'NLP', 'Python']
 excerpt: 'How I structured a planner-executor agent system using LangGraph, with RAG for context injection and a feedback loop for self-correction.'
 lang: 'en'
 readTime: '6 min read'
+reference: 'multi-agent-langgraph'
 ---
 
 ## Why multi-agent?

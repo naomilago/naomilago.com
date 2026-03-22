@@ -1,25 +1,25 @@
 ---
 import PostLayout from '../../layouts/PostLayout.astro';
-import { getCollection, getEntry } from 'astro:content';
-import { t } from '../../i18n/utils';
+import { getCollection } from 'astro:content';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
-  return posts.map(post => ({
+  const enPosts = posts.filter(p => p.data.lang === 'en');
+  return enPosts.map(post => ({
     params: { slug: post.slug },
-    props: { entry: post },
+    props: { entry: post, allPosts: posts },
   }));
 }
 
-const { entry } = Astro.props;
+const { entry, allPosts } = Astro.props;
 const lang = Astro.currentLocale ?? 'en';
-const isOnlyEnglish = entry.data.lang === 'en';
+
+const translatedPost = entry.data.reference 
+  ? allPosts.find(p => p.data.reference === entry.data.reference && p.data.lang === 'pt')
+  : null;
+
+const altHref = translatedPost ? `/pt/blog/${translatedPost.slug}` : '/pt/blog';
 ---
 
-<PostLayout entry={entry}>
-  {isOnlyEnglish && lang === 'pt' && (
-    <div class="mb-6 px-4 py-3 bg-[#ede9f8] dark:bg-[#1e1a40] text-[#5c3fa3] dark:text-[#b89aec] rounded-lg text-[13px]">
-      {t(lang, 'post_only_english')}
-    </div>
-  )}
+<PostLayout entry={entry} altHref={altHref}>
 </PostLayout>

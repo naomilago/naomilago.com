@@ -7,7 +7,18 @@ import { t } from '../../../i18n/utils';
 
 const lang = 'pt';
 const allPosts = await getCollection('blog');
-const posts = allPosts.sort((a, b) => new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf());
+const ptPosts = allPosts.filter(p => p.data.lang === 'pt');
+const ptReferences = new Set(ptPosts.map(p => p.data.reference).filter(Boolean));
+
+const posts = allPosts.filter(p => {
+  if (p.data.lang === 'pt') return true;
+  if (p.data.lang === 'en') {
+    if (p.data.reference && ptReferences.has(p.data.reference)) return false;
+    return true;
+  }
+  return false;
+}).sort((a, b) => new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf());
+
 const allTags = ['Todos', ...Array.from(new Set(posts.flatMap(p => p.data.tags)))];
 ---
 

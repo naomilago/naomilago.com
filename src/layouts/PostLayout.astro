@@ -1,12 +1,12 @@
 ---
 import BaseLayout from './BaseLayout.astro';
 import Navbar from '../components/Navbar.astro';
-const { entry } = Astro.props;
+const { entry, altHref } = Astro.props;
 const { Content } = await entry.render();
 const lang = Astro.currentLocale ?? 'en';
 ---
 <BaseLayout title={`${entry.data.title} — Naomi Lago`} description={entry.data.excerpt}>
-  <Navbar lang={lang} />
+  <Navbar lang={lang} altHref={altHref} />
   <div class="page-body">
     <div class="container py-16 px-6">
       <!-- Post header -->

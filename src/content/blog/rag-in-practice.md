@@ -5,6 +5,7 @@ tags: ['NLP', 'Python', 'MLOps']
 excerpt: 'How I built a semantic search engine using sentence embeddings and FAISS, and what I learned about recall vs. latency tradeoffs in production.'
 lang: 'en'
 readTime: '5 min read'
+reference: 'rag-practice'
 ---
 
 ## The problem
