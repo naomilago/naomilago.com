@@ -1,6 +1,6 @@
 # naomilago.com
 
-Personal website, blog & portfolio — built with Astro, Tailwind CSS, and deployed on Vercel.
+Personal website, blog & portfolio — AI Engineer focused on NLP, LLM agents, and large-scale ML systems. Built with Astro and Tailwind CSS, deployed on Vercel.
 
 ---
 
