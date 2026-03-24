@@ -1,0 +1,165 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navbar from '../components/Navbar.astro';
+import { t } from '../i18n/utils';
+
+const lang = Astro.url.pathname.startsWith('/pt') ? 'pt' : 'en';
+const altHref = lang === 'pt' ? '/404' : '/pt/404';
+const pageTitle = lang === 'pt'
+  ? '404 — Página Não Encontrada | Naomi Lago'
+  : '404 — Page Not Found | Naomi Lago';
+const pageDesc = lang === 'pt'
+  ? 'A página que você está procurando não existe.'
+  : "The page you're looking for doesn't exist.";
+---
+
+<BaseLayout title={pageTitle} description={pageDesc}>
+  <Navbar lang={lang} altHref={altHref} />
+
+  <div class="not-found-body">
+    <div class="not-found-container">
+
+      <div class="not-found-code-wrap">
+        <span class="not-found-code">{t(lang, '404_code')}</span>
+        <div class="not-found-glitch" aria-hidden="true">404</div>
+      </div>
+
+      <h1 class="not-found-title">{t(lang, '404_title')}</h1>
+      <p class="not-found-sub">{t(lang, '404_subtitle')}</p>
+
+      <div class="not-found-actions">
+        <a href="/" class="btn-primary">{t(lang, '404_btn_home')}</a>
+        <a href="/blog" class="btn-ghost">{t(lang, '404_btn_blog')}</a>
+      </div>
+
+      <div class="not-found-grid" aria-hidden="true">
+        {Array.from({ length: 50 }).map(() => <span class="grid-dot" />)}
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .not-found-body {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: clamp(48px, 10vh, 100px) var(--pad);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .not-found-container {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    max-width: 580px;
+  }
+
+  /* ── Glitch 404 number ── */
+  .not-found-code-wrap {
+    position: relative;
+    margin-bottom: 28px;
+    user-select: none;
+  }
+
+  .not-found-code {
+    font-size: clamp(80px, 16vw, 160px);
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    line-height: 1;
+    background: linear-gradient(135deg, var(--accent) 0%, #b07af0 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    display: block;
+  }
+
+  .not-found-glitch {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: clamp(80px, 16vw, 160px);
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(124, 92, 191, 0.18);
+    animation: glitch 4s infinite;
+    pointer-events: none;
+  }
+
+  @keyframes glitch {
+    0%, 90%, 100% { transform: translate(0, 0); opacity: 0; }
+    92%            { transform: translate(-4px, 2px); opacity: 0.45; }
+    94%            { transform: translate(4px, -2px); opacity: 0.45; }
+    96%            { transform: translate(-2px, -2px); opacity: 0.3; }
+    98%            { transform: translate(0, 0); opacity: 0; }
+  }
+
+  /* ── Text ── */
+  .not-found-title {
+    font-size: clamp(20px, 2.5vw, 32px);
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+    margin-bottom: 12px;
+  }
+
+  .not-found-sub {
+    font-size: clamp(13px, 1vw, 15px);
+    line-height: 1.7;
+    color: var(--text-muted);
+    margin-bottom: 32px;
+    max-width: 420px;
+  }
+
+  /* ── Actions ── */
+  .not-found-actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  /* ── Background dot grid ── */
+  .not-found-grid {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    pointer-events: none;
+    opacity: 0.4;
+  }
+
+  .grid-dot {
+    display: block;
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: var(--accent);
+    place-self: center;
+    opacity: 0.15;
+    animation: pulse-dot 3s ease-in-out infinite;
+    animation-delay: calc(var(--i, 0) * 0.06s);
+  }
+
+  .grid-dot:nth-child(odd)  { opacity: 0.08; animation-duration: 4s; }
+  .grid-dot:nth-child(3n)   { opacity: 0.2;  animation-duration: 5s; }
+
+  @keyframes pulse-dot {
+    0%, 100% { transform: scale(1); }
+    50%       { transform: scale(1.6); }
+  }
+
+  @media (max-width: 767px) {
+    .not-found-actions { flex-direction: column; align-items: center; }
+  }
+</style>
