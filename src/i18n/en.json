@@ -11,5 +11,10 @@
   "see_all": "See all →",
   "post_only_english": "This post is only available in English.",
   "post_only_portuguese": "This post is only available in Portuguese.",
-  "search_placeholder": "Search by title..."
+  "search_placeholder": "Search by title...",
+  "404_code": "404",
+  "404_title": "Page not found",
+  "404_subtitle": "The page you're looking for doesn't exist or has been moved.",
+  "404_btn_home": "Go home",
+  "404_btn_blog": "Browse the blog"
 }

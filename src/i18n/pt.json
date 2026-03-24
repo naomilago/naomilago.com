@@ -11,5 +11,10 @@
   "see_all": "Ver todos →",
   "post_only_english": "Este post está disponível apenas em inglês.",
   "post_only_portuguese": "Este post está disponível apenas em português.",
-  "search_placeholder": "Pesquisar por título..."
+  "search_placeholder": "Pesquisar por título...",
+  "404_code": "404",
+  "404_title": "Página não encontrada",
+  "404_subtitle": "A página que você está procurando não existe ou foi movida.",
+  "404_btn_home": "Ir para início",
+  "404_btn_blog": "Explorar o blog"
 }
