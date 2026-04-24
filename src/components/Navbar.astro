@@ -10,11 +10,13 @@ const navLinks = lang === 'pt'
       { href: '/pt/about',     label: 'Sobre'     },
       { href: '/pt/blog',      label: 'Blog'      },
       { href: '/pt/portfolio', label: 'Portfólio' },
+      { href: 'https://docs.naomilago.com', label: 'Docs', target: '_blank' },
     ]
   : [
       { href: '/about',     label: 'About'     },
       { href: '/blog',      label: 'Blog'      },
       { href: '/portfolio', label: 'Portfolio' },
+      { href: 'https://docs.naomilago.com', label: 'Docs', target: '_blank' },
     ];
 
 const homeHref    = lang === 'pt' ? '/pt' : '/';
@@ -36,7 +38,7 @@ const altLangLabel = lang === 'pt' ? 'EN' : 'PT';
     <!-- Desktop links -->
     <div class="navbar-links">
       {navLinks.map(link => (
-        <a href={link.href} class="navbar-link">{link.label}</a>
+        <a href={link.href} class="navbar-link" target={link.target}>{link.label}</a>
       ))}
       <a href={altLangHref} class="lang-pill">{altLangLabel}</a>
       <button id="theme-toggle" class="theme-btn" aria-label="Toggle theme">
@@ -85,7 +87,7 @@ const altLangLabel = lang === 'pt' ? 'EN' : 'PT';
 <!-- Mobile dropdown -->
 <div id="mobile-menu" class="mobile-menu">
   {navLinks.map(link => (
-    <a href={link.href}>{link.label}</a>
+    <a href={link.href} target={link.target}>{link.label}</a>
   ))}
 </div>
 
